@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	sunjumig.Create("./migration", "test")
+	sunjumig.Create("test")
 }

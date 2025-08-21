@@ -54,7 +54,11 @@ func Init(db *gorm.DB, migrations []Migration) (*Migrator, error) {
 	return migrator, nil
 }
 
-func Create(path, name string) error {
+func Create(name string) error {
+	err := os.Mkdir("migration", 0755)
+	if err != nil && !os.IsExist(err) {
+		panic(err)
+	}
 	version := time.Now().Format("20060102150405")
 
 	in := struct {
@@ -72,7 +76,7 @@ func Create(path, name string) error {
 		return errors.New("Unable to execute template: " + err.Error())
 	}
 
-	f, err := os.Create(fmt.Sprintf("%s/%s_%s.go", path, version, name))
+	f, err := os.Create(fmt.Sprintf("%s/%s_%s.go", "migration", version, name))
 
 	if err != nil {
 		return errors.New("Unable to create migration file: " + err.Error())
