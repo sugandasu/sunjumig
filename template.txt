@@ -3,7 +3,7 @@ package migration
 import (
 	"time"
 
-	"github.com/nanggava/backend/pkg/migrator"
+	"github.com/sugandasu/sunjumig"
 	"gorm.io/gorm"
 )
 
