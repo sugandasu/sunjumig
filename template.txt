@@ -1,0 +1,31 @@
+package migration
+
+import (
+	"time"
+
+	"github.com/nanggava/backend/pkg/migrator"
+	"gorm.io/gorm"
+)
+
+func Init{{.Version}}() migrator.Migration {
+	return migrator.Migration{
+		ID:        0,
+		Name:      "{{.Version}}_{{.Name}}",
+		Batch:     0,
+		CreatedAt: time.Time{},
+		Up:        mig_{{.Version}}_{{.Name}}_up,
+		Down:      mig_{{.Version}}_{{.Name}}_down,
+	}
+}
+
+func mig_{{.Version}}_{{.Name}}_up(tx *gorm.DB) error {
+	err := tx.Exec(`;`).Error
+
+	return err
+}
+
+func mig_{{.Version}}_{{.Name}}_down(tx *gorm.DB) error {
+	err := tx.Exec(`;`).Error
+
+	return err
+}
