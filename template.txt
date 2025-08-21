@@ -7,8 +7,8 @@ import (
 	"gorm.io/gorm"
 )
 
-func Init{{.Version}}() migrator.Migration {
-	return migrator.Migration{
+func Init{{.Version}}() sunjumig.Migration {
+	return sunjumig.Migration{
 		ID:        0,
 		Name:      "{{.Version}}_{{.Name}}",
 		Batch:     0,

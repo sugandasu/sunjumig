@@ -9,8 +9,13 @@ import (
 	"text/template"
 	"time"
 
+	_ "embed"
+
 	"gorm.io/gorm"
 )
+
+//go:embed template.txt
+var templateText string
 
 func Init(db *gorm.DB, migrations []Migration) (*Migrator, error) {
 	var migrator = &Migrator{
@@ -62,7 +67,7 @@ func Create(path, name string) error {
 
 	var out bytes.Buffer
 
-	t := template.Must(template.ParseFiles("./template.txt"))
+	t := template.Must(template.New("tmpl").Parse(templateText))
 	if err := t.Execute(&out, in); err != nil {
 		return errors.New("Unable to execute template: " + err.Error())
 	}
